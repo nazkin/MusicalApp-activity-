@@ -7,12 +7,24 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
     username: {
         type: String, 
-        unique: true
+        unique: true 
     },
     password: {
         type: String, 
         required: true,
         bcrypt: true 
+    },
+    name: {
+        type: String,
+        default: ""
+    },
+    skills: {
+        type: String,
+        default: ""
+    },
+    genre: {
+        type: String,
+        default: ""
     }
   
 });

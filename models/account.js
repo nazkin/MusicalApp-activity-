@@ -1,25 +1,23 @@
 const mongoose = require('mongoose');
-
+//Marked for deletion
 const AccountSchema = new mongoose.Schema({
     email: {
-        type: String,
-        unique: true
+        type: String, 
+        required: true
     },
     name: {
         type: String,
-        unique: true
+        default: ""
     },
     skills: {
         type: String,
+        default: ""
     },
-    country: {
+    genre: {
         type: String,
-    },
-    city: {
-        type: String
+        default: ""
     }
 });
 
 const Account = mongoose.model('Account', AccountSchema);
 
-module.exports = Account;

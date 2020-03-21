@@ -5,7 +5,7 @@ const port = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./models/user');
-const Account = require('./models/account');
+// const Account = require('./models/account');
 const {verifyToken} = require('./middleware');
 
 mongoose.connect("mongodb://localhost:27017/music_collab", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -28,19 +28,19 @@ app.post('/api/add', (req, res)=> {
     User.create({
         username: req.body.username,
         password: req.body.password
+   
     },(err, usr)=> {
+        console.log(usr);
         if(!err){
-            jwt.sign({user: usr.username}, 'secretkey', (err,token)=>{
+            jwt.sign({id: usr._id, user: usr.username}, 'secretkey', (err,token)=>{
                 res.json({
                     token: token
                 });
             });
-        }else if(err.code == 11000) {
-            res.json(`This username already exists in the database`);
-        } else {
-            res.json(`Error: ${error}`);
+        }else {
+            res.json(`Error: ${err.message}`);
         }
-    })
+    });
 });
 //This route is responsible for logging in new users
 app.post('/api/login', (req, res)=> {
@@ -54,7 +54,7 @@ app.post('/api/login', (req, res)=> {
             .then(valid=> {
                 if(valid){
                     //jwt.sign() send out the token during the log-in process just like you would for sign-up
-                    jwt.sign({user: usr.username}, 'secretkey', (err, token)=> {
+                    jwt.sign({id: usr._id, user: usr.username}, 'secretkey', (err, token)=> {
                         res.json({
                             token: token
                         });
@@ -66,8 +66,8 @@ app.post('/api/login', (req, res)=> {
     });
 });
 
-//JWT protected route
-app.get('/listings',verifyToken, (req,res)=> {
+//JWT protected route for simple authentication
+app.get('/api/enter',verifyToken, (req,res)=> {
     jwt.verify(req.token, 'secretkey', (err, data)=> {
         if(err){
            res.sendStatus(403); 
@@ -81,44 +81,46 @@ app.get('/listings',verifyToken, (req,res)=> {
 
 });
 
-
-
-
-//Express routes that deal with personal information account
-//*****Rertrieve the Account 
-app.get('/api/findAccount/:email',verifyToken, (req,res)=> {
-    const emailUser = req.params.email;
+//Retrieve personal user data 
+app.get('/api/find/:userId',verifyToken, (req,res)=> {
+    const id = req.params.userId;
     jwt.verify(req.token, 'secretkey', (err, data)=> {
         if(err){
            res.sendStatus(403); 
         }else{
-            Account.findOne({
-                email: emailUser
-            }).then(acc=> {
+            User.findById(id)
+            .then(usr => {
                 res.json({
-                  account: acc  
+                    userData: usr
                 });
-            })
+            }).catch(err=> {
+                console.log(err);
+            });
         }
     });
-
 });
-//*****Create the account/
-app.post('/api/createAccount', (req,res)=> {
-    const account = {
-        email: req.body.email, 
+
+//Update personal informatuion 
+app.post('/api/update/:userId', (req,res)=> {
+    const id = req.params.userId;
+    const updateObj= {
         name: req.body.name,
         skills: req.body.skills,
-        country: req.body.country, 
-        city: req.body.city
+        genre: req.body.genre
     }
-
-    Account.create(account)
-        .then(val => {
-            res.json(val);
-            console.log('Successfully Added')
-        }).catch(err=> console.log(err));
+ 
+    User.findByIdAndUpdate(id,updateObj)
+    .then(result=> {
+        res.json({
+            message: 'Success, the update was successful',
+            update: result
+        });
+    })
+    .catch(err=> {console.log(err)});
+        
+   
 });
+
 
 app.listen(port, ()=> {
     console.log(`Server started successfully. Connect at http://localhost:${port}`);

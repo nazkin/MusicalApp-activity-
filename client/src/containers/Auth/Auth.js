@@ -32,11 +32,10 @@ const SignIn = (props) => {
         //Sending out the post request that generates the JWT
         axios.post(url, user)
             .then(res=> {
-                console.log("Success, user logged in");
+                sessionStorage.setItem('jwtToken', res.data.token);
                 setUsername("");
                 setPassword("");
-                sessionStorage.setItem('jwtToken', res.data.token);
-                props.history.push("/home");
+                props.history.push('/enter');
             }).catch(err=> {
                 console.log(err);
             });
