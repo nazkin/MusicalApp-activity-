@@ -8,8 +8,14 @@ html {
  }
  .side-drawer { 
     height: 85%;
-    background: white;
+    background: rgb(100,164,158);
+    background: -moz-linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
+    background: -webkit-linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
+    background: linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#64a49e",endColorstr="#044f55",GradientType=1);
+    
     position: fixed;
+    color: black;
     top: 0;
     left: 0; 
     width: 100%;
@@ -17,18 +23,27 @@ html {
     box-shadow: 1px 0px 7px rgba(0,0,0,0.9); 
     transform: translateY(-100%);
     transition: transform 0.3s ease-out;
+    border-bottom: 1px solid darkorange;
  }
  .side-drawer.open {
     transform: translateY(0);
  }
 
  .cont-acc-entry{
-   background: radial-gradient(ellipse at center, #fceabb 0%,#fccd4d 50%,#f8b500 67%,#fbdf93 100%);
+   border-left: 1px double darkorange;
+   border-right: 1px double darkorange;
+   background-color: rgb(70, 70, 70, 0.6);
+   color: linen;
+
  }
  .acc-entry-row{
-    background-color: darkslategrey;
+   background: rgb(70, 70, 70, 0.3);
+ 
+   padding: 1rem;
+ 
+  
  }
  .music-link-row{
-   background-color: goldenrod;
+   
    padding: 1rem;
  }

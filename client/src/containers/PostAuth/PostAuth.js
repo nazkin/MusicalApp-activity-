@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
+import './PostAuth.css';
 import SlideDrawer from '../../components/SlideDrawer/SlideDrawer';
 import Backdrop from '../../components/Backdrop/Backdrop';
 /**
@@ -57,12 +58,11 @@ const [genre, setGenre] = useState("");
         backdrop = <Backdrop closeDrawer = {backDropClickHandler}/>
     }
   return(
-    <div>
+    <div className="postauth-body">
         <SlideDrawer name={fullName} skills={skills} genre={genre} id={userId} username={userName} show={drawerOpen} close ={backDropClickHandler}/>
         {backdrop}
-        <h1>Welcome, {userName}</h1>
-        
-        <div className="container">
+        <div className="container ">
+        <h1>Welcome to SchoolDance Jukebox </h1>
             <h4>What would you like to do next?</h4>
             <div className="row">
                 
@@ -70,9 +70,10 @@ const [genre, setGenre] = useState("");
                     <button onClick={drawerToggleHandler} className="btn btn-warning btn-lg my-5">Manage Your Account</button>
                 </div>
                 <div className="col-md-6 d-flex justify-content-center align-items-center p-5">
-                    <button className="btn btn-success btn-lg my-5">View Local Talent</button>
+                    <button className="btn btn-danger btn-lg my-5">View Local Talent</button>
                 </div>
             </div>
+            <p>{userName}</p>
         </div>
     </div>
    )

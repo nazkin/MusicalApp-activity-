@@ -1,0 +1,12 @@
+.postauth-body{
+    padding: 8rem;
+    width: 100%;
+    background: rgb(100,164,158);
+    background: -moz-linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
+    background: -webkit-linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
+    background: linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#64a49e",endColorstr="#044f55",GradientType=1);
+    border-bottom: 8px double rgba(17,212,110,1);
+  
+}
+

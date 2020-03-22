@@ -1,5 +1,6 @@
 html{
-  background-color: black;
+  background: rgb(100,164,158);
+background: linear-gradient(90deg, rgba(100,164,158,1) 7%, rgba(38,182,198,1) 49%, rgba(22,67,136,1) 87%);
 }
 .App {
   text-align: center;
