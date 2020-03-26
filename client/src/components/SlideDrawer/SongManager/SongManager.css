@@ -1,0 +1,71 @@
+.mp3-form{
+    width: 100%;
+    padding: 10px;
+    color: linen;
+    background-color: black;
+    border: 1px solid silver;
+    border-radius: 5px;
+}
+
+#mp3-input{
+    border: 1px solid skyblue;
+    background-color: lavender;
+    cursor: pointer;
+    color: black;
+}
+.songs-account{
+
+    background-color: rgb(17, 15, 15, 0.5);
+    margin-top: 3rem;
+    border-left: 2px double darkorange;
+    border-right: 2px double darkorange;
+}
+
+.songs-list{
+    height: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.songs-upload-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.songs-list-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    -ms-overflow-style: none;
+}
+
+
+.songs-list-column::-webkit-scrollbar {
+    display: none;
+  }
+.aSong{
+    width: 80%;
+    color: lavender;
+    font-size: 20px;
+    padding: 5px;
+    border-top: 2px double black;
+    border-radius: 5px;
+    background-color: rgb(216, 145, 58, 0.7);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.song-upload-title{
+    font-size: 24px;
+    color: lavender;
+    width: 90%;
+    background-color: rgb(241, 94, 41, 0.7);
+}
+#songpage-title{
+    width: 100%;
+    background-color: black;
+    color: lavender;
+    border-bottom: 2px double darkorange;
+    padding-top: 0.2rem;
+}

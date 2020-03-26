@@ -5,7 +5,8 @@ const port = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./models/user');
-// const Account = require('./models/account');
+const Account = require('./models/account');
+const Song = require('./models/song');
 const {verifyToken} = require('./middleware');
 
 mongoose.connect("mongodb://localhost:27017/music_collab", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -33,9 +34,16 @@ app.post('/api/add', (req, res)=> {
         console.log(usr);
         if(!err){
             jwt.sign({id: usr._id, user: usr.username}, 'secretkey', (err,token)=>{
-                res.json({
-                    token: token
-                });
+                Account.create({
+                    username:  usr.username,
+                    userId: usr._id
+                    
+                }).then(acc=> {
+                    res.json({
+                        token: token
+                    });
+                }).catch(err=> console.log(err));
+
             });
         }else {
             res.json(`Error: ${err.message}`);
@@ -117,9 +125,48 @@ app.post('/api/update/:userId', (req,res)=> {
         });
     })
     .catch(err=> {console.log(err)});
-        
-   
 });
+//******Working With Songs********
+app.get('/api/accountInfo/:id', (req,res)=> {
+    Account.findOne({
+        userId: req.params.id
+       
+    }).populate('songs').then(acc=> {
+        res.json({
+            msg: 'Account found',
+            data: acc
+        });
+    })
+    .catch(err=> res.json({
+        msg: "ERROR",
+        error: err
+    }));
+});
+
+//Store the download URL after a song has been uploaded
+app.post('/api/upload/song/:id', (req, res)=> {
+    const uploadObj = {
+        name: req.body.name,
+        downloadURL: req.body.downloadURL,
+        authorID: req.body.id
+    }
+    Account.findById(req.params.id)
+        .then(accountObject=> {
+            Song.create(uploadObj,(err, song)=>{
+                if(!err){
+                    accountObject.songs.push(song);
+                    accountObject.save();
+                    res.json({
+                        msg: 'The song has been added successfully',
+                    });
+                }
+            });
+        }).catch(err => res.json({
+            msg: "Error when uploading song"+ err.message,
+            error: err
+        }));
+});
+
 
 
 app.listen(port, ()=> {

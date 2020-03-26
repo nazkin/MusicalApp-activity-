@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
 //Marked for deletion
 const AccountSchema = new mongoose.Schema({
-    email: {
-        type: String, 
-        required: true
+    username: {
+        type: String
     },
-    name: {
-        type: String,
-        default: ""
+    userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'  
     },
-    skills: {
-        type: String,
-        default: ""
-    },
-    genre: {
-        type: String,
-        default: ""
-    }
+    songs: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: `Song`
+        }   
+    ], 
+
 });
 
 const Account = mongoose.model('Account', AccountSchema);
+
+module.exports = Account;
 

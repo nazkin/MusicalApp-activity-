@@ -57,7 +57,7 @@ const SlideDrawer = (props) => {
     let accountInfoType; 
     if(isBasicInfo && !isMusic && ! isPoetry){
         accountInfoType = (
-            <div className="container p-1 center-text">
+            <div className="container p-1 center-text mb-4">
                 <h3>General Account Management Form </h3>
                 <div className="row d-flex justify-content-center acc-entry-row">
                 
@@ -87,9 +87,9 @@ const SlideDrawer = (props) => {
             </div>
         )
     }else if(!isBasicInfo && !isMusic && isPoetry){
-        accountInfoType = <PoetryManager />
+        accountInfoType = <PoetryManager id={props.id} user={props.username} close={props.close}/>
     }else {
-        accountInfoType = <MusicManager />
+        accountInfoType = <MusicManager id={props.id} user={props.username} close={props.close}/>
     }
   return(
     <div className={drawerClasses}>
