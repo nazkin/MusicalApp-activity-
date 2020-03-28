@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import firebase from 'firebase';
 import storage from '../../../Firebase/index';
 import './SongManager.css';
-import FileUploader from 'react-firebase-file-uploader';
 import axios from 'axios';
 /**
 * @author
@@ -10,15 +9,15 @@ import axios from 'axios';
 **/
 
 const SongManager = (props) => {
+
+  //*************************************************************STATE HOOKS
   const [src, setSrc] = useState(null);
   const [url, setURL] = useState("");
   const [progress, setProgress] = useState(0);
-  const [songName, setSongName] = useState("");
   const [accountId, setAccountId] = useState("");
   const [allSongs, setAllSongs] = useState([]);
-  const [songUpload, setSongUpload] = useState(false)
 
-
+//***************************************************************EFFECT HOOKS
   useEffect(()=> {
     axios.get(`http://localhost:8080/api/accountInfo/${props.id}`)
       .then(res=> {
@@ -32,13 +31,16 @@ const SongManager = (props) => {
       })
       .catch(err=> console.log(err));
   }, []);
-  
+//******************************************************************STATE HANDLERS 
+
+  //Manages Change of the input field in the form 
   const handleChange = (e)=> {
     if(e.target.files[0]){
       const file = e.target.files[0];
       setSrc(file);
     }
   }
+  //Saves the download URL into our local database
   const saveSongDownload = (songUrl, nameOfSong)=> {
     const obj = {
      name: nameOfSong,
@@ -52,6 +54,7 @@ const SongManager = (props) => {
       })
       .catch(err=> console.log(err));
   }
+  //Uploads the file to Firebase
   const uploadHandler = (e)=> {
     e.preventDefault();
     const song = src;
@@ -71,7 +74,7 @@ const SongManager = (props) => {
       error => console.log(error),
       ()=> {
         uploadTask.snapshot.ref.getDownloadURL().then(url=> {
-          const linkURL = url.toString()
+          const linkURL = url.toString();
           console.log('File can be retrieved at the following URL =>', url);
           setURL(linkURL);
           //Now here we are going to call the function that will store the song for us
@@ -80,6 +83,8 @@ const SongManager = (props) => {
       }
     )
   }
+
+    //***********************************************************************LAYOUT SUPPORT VARIABLES
     let songsDOM = (
       <div className="aSong">
          Currently there are no songs on your account
@@ -90,21 +95,18 @@ const SongManager = (props) => {
         let title = song.name.substring(0, song.name.length-4);
         let download = song.downloadURL;
         return (
-          <div className="aSong">
-          <a className="float-left mx-1 d-inline" href="#">{title}</a> 
-          <audio controls>
-            <source type="audio/mpeg" src={download}/>
-          </audio>
+          <div key={download} className="aSong">
+            <button  className="btn btn-dark  mx-1 d-inline float-left">{title}</button>        
           </div>
         )
       });
     }
 
   return(
-    <div className="container p-1 mb-4 songs-account">
-      <div id="songpage-title">
-      <h3 className="mb-5 mt-2">Song Manager {props.user}</h3>
-      </div>
+    <div className="container songs-account">
+     
+      <h3 className="mb-5 ">Song Manager </h3>
+     
         <div className="row songs-list">
         
           <div className="col-md-6 p-1 songs-list-column">
@@ -112,12 +114,9 @@ const SongManager = (props) => {
             {/* <audio controls>
             <source type="audio/mpeg" src=""/>
             </audio> */}
-
+       
           </div>
           <div className="col-md-6 p-1 songs-upload-column">
-            <div className="song-upload-title">
-              Upload Your New Hit
-            </div>
             <div className="mt-2">
               {progress === 0 ? null : <p>Uploading... {progress}%</p> }
               

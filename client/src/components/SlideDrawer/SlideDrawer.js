@@ -57,7 +57,7 @@ const SlideDrawer = (props) => {
     let accountInfoType; 
     if(isBasicInfo && !isMusic && ! isPoetry){
         accountInfoType = (
-            <div className="container p-1 center-text mb-4">
+            <div className="container center-text general-manager">
                 <h3>General Account Management Form </h3>
                 <div className="row d-flex justify-content-center acc-entry-row">
                 
@@ -79,7 +79,7 @@ const SlideDrawer = (props) => {
                             <input onChange={(event)=> {setGenre(event.target.value)}} value={genre}
                              type="text" className="form-control" id="" />
                         </div> 
-                        <button type="submit" className="btn btn-primary">Update</button>
+                        <button type="submit" className="btn btn-outline-primary">Update</button>
                         </form>
                     </div>
                     
@@ -95,10 +95,12 @@ const SlideDrawer = (props) => {
     <div className={drawerClasses}>
         
         {accountInfoType}
-        <button onClick={props.close} className="btn btn-link mx-3 float-left">Leave Account Management</button>
-        <button onClick={manageBasicsHandler} className="btn btn-dark mx-3">Manage Basics</button>
-        <button onClick={manageMusicHandler} className="btn btn-info mx-3">Manage Music</button>
-        <button onClick={managePoetryHandler} className="btn btn-warning mx-3 ">Manage Poetry</button>
+        <div className="account-control-panel">
+            <button onClick={props.close} className="btn btn-link mx-3 float-left">Leave Account Management</button>
+            <button onClick={manageBasicsHandler} className="btn btn-dark mx-3">Manage Basics</button>
+            <button onClick={manageMusicHandler} className="btn btn-info mx-3">Manage Music</button>
+            <button onClick={managePoetryHandler} className="btn btn-warning mx-3 ">Manage Poetry</button>
+        </div>
        
     </div>
    )

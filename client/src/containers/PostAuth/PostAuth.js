@@ -62,15 +62,15 @@ const [genre, setGenre] = useState("");
         <SlideDrawer name={fullName} skills={skills} genre={genre} id={userId} username={userName} show={drawerOpen} close ={backDropClickHandler}/>
         {backdrop}
         <div className="container ">
-        <h1>Welcome to SchoolDance Jukebox </h1>
+        <h1>Welcome to JukeBox Connected</h1>
             <h4>What would you like to do next?</h4>
             <div className="row">
                 
                 <div className="col-md-6 d-flex justify-content-center align-items-center p-5">
-                    <button onClick={drawerToggleHandler} className="btn btn-warning btn-lg my-5">Manage Your Account</button>
+                    <button onClick={drawerToggleHandler} className="btn btn-warning btn-lg my-5">Manage Account</button>
                 </div>
                 <div className="col-md-6 d-flex justify-content-center align-items-center p-5">
-                    <button className="btn btn-danger btn-lg my-5">View Local Talent</button>
+                    <button className="btn btn-danger btn-lg my-5">Explore Talent</button>
                 </div>
             </div>
             <p>{userName}</p>

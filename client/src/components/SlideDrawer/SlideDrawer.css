@@ -7,13 +7,14 @@ html {
     width: 100%;
  }
  .side-drawer { 
-    height: 85%;
+    height: 95%;
     background: rgb(100,164,158);
     background: -moz-linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
     background: -webkit-linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
     background: linear-gradient(342deg, rgba(100,164,158,1) 31%, rgba(17,212,110,1) 52%, rgba(4,79,85,1) 95%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#64a49e",endColorstr="#044f55",GradientType=1);
-    
+    overflow: hidden;
+    overflow-y: scroll;
     position: fixed;
     color: black;
     top: 0;
@@ -25,14 +26,22 @@ html {
     transition: transform 0.3s ease-out;
     border-bottom: 1px solid darkorange;
  }
+
  .side-drawer.open {
     transform: translateY(0);
  }
-
+ .general-manager{
+   height:85%;
+   background-color: rgb(0, 0, 61, 0.5);
+   border-left: 2px double darkorange;
+   border-right: 2px double darkorange;
+   margin-bottom: 1rem;
+   color: lavender;
+}
  .cont-acc-entry{
    border-left: 1px double darkorange;
    border-right: 1px double darkorange;
-   background-color: rgb(70, 70, 70, 0.6);
+   background-color: rgba(15, 15, 15, 0.9);
    color: linen;
 
  }
@@ -47,3 +56,4 @@ html {
    
    padding: 1rem;
  }
+ 
