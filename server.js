@@ -7,6 +7,7 @@ const cors = require('cors');
 const User = require('./models/user');
 const Account = require('./models/account');
 const Song = require('./models/song');
+const Image = require('./models/image');
 const {verifyToken} = require('./middleware');
 
 mongoose.connect("mongodb://localhost:27017/music_collab", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -127,7 +128,7 @@ app.post('/api/update/:userId', (req,res)=> {
     .catch(err=> {console.log(err)});
 });
 //******Working With Songs********
-app.get('/api/accountInfo/:id', (req,res)=> {
+app.get('/api/accountInfo/songs/:id', (req,res)=> {
     Account.findOne({
         userId: req.params.id
        
@@ -167,7 +168,76 @@ app.post('/api/upload/song/:id', (req, res)=> {
         }));
 });
 
+//****************Image Uploading and Handling files
 
+
+//Retrieving any Images that might be saved to an account
+app.get('/api/accountInfo/photos/:id', (req,res)=> {
+    Account.findOne({
+        userId: req.params.id
+       
+    }).populate('images').then(acc=> {
+        res.json({
+            msg: 'Account found',
+            data: acc
+        });
+    })
+    .catch(err=> res.json({
+        msg: "ERROR",
+        error: err
+    }));
+})
+// Saving image information after they have been uploaded
+app.post('/api/upload/image/:id', (req,res)=> {
+    const imageObj = {
+        name: req.body.name,
+        downloadURL: req.body.url,
+        authorID: req.body.id
+    }
+    Account.findById(req.params.id)
+        .then(account => {
+            Image.create(imageObj,(err, img)=>{
+                if(!err){
+                    account.images.push(img);
+                    account.save();
+                    res.json({
+                        msg: 'The image has been added successfully',
+                    });
+                }
+            });
+        }).catch(err=> res.json({
+            message: err.message,
+            err: err
+        }));
+});
+// **********************Information pertaining to EXPLORING USERS AND THEIR INFO
+//This route retrieves all account information
+app.get("/api/explore/accounts", (req,res)=> {
+    Account.find({}).populate('images').populate('songs')
+        .then(accounts => {
+            res.json({
+                msg: 'Accounts Successfully retrieved',
+                accounts
+            });
+        })
+        .catch(err=> res.json({
+            msg: err.message,
+            error: err
+        }));
+        
+
+});
+app.get("/api/explore/users", (req, res)=> {
+    User.find({})
+        .then(usr=> res.json({
+            msg: 'Success, accounts retrieved',
+            users: usr
+        }))
+        .catch(err=> res.json({
+            msg: err.message,
+            error: err
+        }));
+})
 
 app.listen(port, ()=> {
     console.log(`Server started successfully. Connect at http://localhost:${port}`);

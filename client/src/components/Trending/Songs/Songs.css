@@ -1,0 +1,39 @@
+.media-player{
+width: 40%;
+}
+.song-title{
+  width: 50%; 
+  float: left; 
+}
+.player{
+    width:250px;
+}
+.song-full{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
+.trending-song-title{
+    background-color: black;
+}
+
+.trending-song-row{
+    background: rgb(148, 185, 197, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: space-between; 
+}
+
+#name-song{
+    color: rgba(38,182,198,1);
+    border-bottom: 1px double orange;
+}
+#author-song{
+    color: orange;
+    border-top: 1px double rgba(38,182,198,1);
+}

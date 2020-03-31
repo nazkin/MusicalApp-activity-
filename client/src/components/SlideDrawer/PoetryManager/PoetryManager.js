@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import firebase from 'firebase';
 import './PoetryManager.css';
+import axios from 'axios';
 /**
 * @author
 * @function PoetryManager
@@ -9,10 +10,42 @@ import './PoetryManager.css';
 
 const PoetryManager = (props) => {
 //STATE
-const [photoSrc, setPhotoSrc] = useState("");
+const [photoSrc, setPhotoSrc] = useState(null);
 const [theProgress, setTheProgress] = useState(0);
+const [idAccount, setIdAccount] = useState("");
+const [images, setImages] = useState([]);
+
+useEffect(()=> {
+  axios.get(`http://localhost:8080/api/accountInfo/photos/${props.id}`)
+  .then(res=> {
+    console.log(res.data.data.images);
+    const accId = res.data.data._id; 
+    
+    setImages([...res.data.data.images]);
+    setIdAccount(accId);
+ 
+  
+  })
+  .catch(err=> console.log(err));
+}, [props.close]);
 
 //Handler Functions
+const saveImageDownload = (download, name)=> {
+  const object = {
+    name: name,
+    url: download,
+    id: props.id
+  }
+  axios.post(`http://localhost:8080/api/upload/image/${idAccount}`, object)
+    .then(res=> {
+      setPhotoSrc(null);
+      props.close();
+
+    })
+    .catch(err=> console.log(err));
+}
+
+//Handling our 
 const uploadFileHandler = (e) => {
   e.preventDefault();
   const photo = photoSrc;
@@ -36,6 +69,7 @@ const uploadFileHandler = (e) => {
       uploadTask.snapshot.ref.getDownloadURL().then(url=> {
         const linkURL = url.toString();
         console.log('File can be retrieved at the following URL =>', url);
+        saveImageDownload(linkURL, photoName);
       });
     }
   )   
@@ -48,16 +82,27 @@ const inputChangeHandler = (e) => {
   }
 }
 //Layout variables 
-let photoContent = <p>{props.user} has not uploaded any photos yet</p>;
+let photoContent =<div className="ml-5"><img src="user.png" width="40px" /><p>{props.user} has not uploaded any photos yet</p></div> ;
+if(images.length != 0){
+  photoContent = images.map(img=> {
+   return (
+     <div className="col-md-4 my-1">
+       <img src={img.downloadURL} width="100%" />
+     </div>
+   )
+  })
+}
+
   return(
     <div className="container photos-container">
       
       <div className="row d-flex justify-content-between">
         <h1>Upload Photos of Yourself</h1>
         <div className="col-md-7 border p-1">
+          <div className = "row image-row">
           {/* Flex-container that is creating a layout for all the files being uploaded */}
           {photoContent}
-          <img src="user.png" />
+          </div>
         </div>
         <div className="col-md-4 p-1">
             <form onSubmit={uploadFileHandler} className="photo-form">

@@ -3,6 +3,7 @@ import axios from 'axios';
 import './PostAuth.css';
 import SlideDrawer from '../../components/SlideDrawer/SlideDrawer';
 import Backdrop from '../../components/Backdrop/Backdrop';
+import {Link} from 'react-router-dom';
 /**
 * @author
 * @function PostAuth
@@ -70,7 +71,7 @@ const [genre, setGenre] = useState("");
                     <button onClick={drawerToggleHandler} className="btn btn-warning btn-lg my-5">Manage Account</button>
                 </div>
                 <div className="col-md-6 d-flex justify-content-center align-items-center p-5">
-                    <button className="btn btn-danger btn-lg my-5">Explore Talent</button>
+                    <Link to="/explore" className="btn btn-danger btn-lg my-5">Explore Talent</Link>
                 </div>
             </div>
             <p>{userName}</p>

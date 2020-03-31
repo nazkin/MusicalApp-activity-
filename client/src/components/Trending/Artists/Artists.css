@@ -1,0 +1,33 @@
+.artists-row{
+    display: flex; 
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    color: linen;
+   background-color: black;
+}
+.artists-column{
+    background: rgba(0, 0, 0, 0.5);
+    color: lavender;
+}
+
+.artist-photo{
+    border-left: 1px double transparent;
+    border-right: 1px double transparent;
+    border-bottom: 2px double transparent;
+    border-top: 2px double darkorange;
+    cursor: pointer;
+}
+.artist-photo:hover{
+    border-left: 1px double darkorange;
+    border-right: 1px double darkorange;
+    border-bottom: 2px double darkorange;
+}
+.skills-section {
+    color: orange;
+    border-bottom: 1px double rgba(38,182,198,1);
+}
+.genre-section{
+    border-top: 2px double darkOrange;
+    color: rgba(38,182,198,1);
+}

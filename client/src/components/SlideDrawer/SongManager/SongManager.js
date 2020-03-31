@@ -19,7 +19,7 @@ const SongManager = (props) => {
 
 //***************************************************************EFFECT HOOKS
   useEffect(()=> {
-    axios.get(`http://localhost:8080/api/accountInfo/${props.id}`)
+    axios.get(`http://localhost:8080/api/accountInfo/songs/${props.id}`)
       .then(res=> {
         console.log(res.data);
         const accId = res.data.data._id; 
@@ -30,7 +30,7 @@ const SongManager = (props) => {
       
       })
       .catch(err=> console.log(err));
-  }, []);
+  }, [props.close]);
 //******************************************************************STATE HANDLERS 
 
   //Manages Change of the input field in the form 
@@ -50,7 +50,8 @@ const SongManager = (props) => {
     axios.post(`http://localhost:8080/api/upload/song/${accountId}`,obj)
       .then(res=> {
         console.log(res);
-        setSrc("");
+        setSrc(null);
+        props.close();
       })
       .catch(err=> console.log(err));
   }

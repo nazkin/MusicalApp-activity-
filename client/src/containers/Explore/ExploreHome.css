@@ -1,0 +1,29 @@
+
+.explore-container-main{
+    background: rgb(100,164,158);
+    background: linear-gradient(90deg, rgba(100,164,158,1) 7%, rgba(38,182,198,1) 49%, rgba(22,67,136,1) 87%);
+   min-height: 36rem;
+   color: lavender;
+}
+.navigation{
+    width: 100%;
+    height: 2.5rem;
+    background: darkcyan;
+    color: lavender;
+    padding:0.25rem;
+    border-bottom: 2px double darkorange;
+}
+.navigation-link{
+    background: rgb(216, 159, 35);
+    height: 90%;
+    float: right;
+    padding: 2px;
+}
+
+.explore-row-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 20rem;
+    background-color: rgb(5, 5, 94, 0.6);
+}
