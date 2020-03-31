@@ -18,8 +18,11 @@ const Artists = (props) => {
         })  
         return(
             <div key={usr._id} className="col-md-5 my-1 p-1">
-                <h4>{usr.name}</h4>
-                <img className="artist-photo" src={photographs[0]} width="75%"/>
+                <div className="artist-photo">
+                    <h4>{usr.name}</h4>
+                    <img  src={photographs[0]} width="85%"/>
+                </div>
+
                 <h6 className="mt-2 skills-section">{usr.skills}</h6>
                 <h4 className="genre-section">{usr.genre}</h4>
             </div>

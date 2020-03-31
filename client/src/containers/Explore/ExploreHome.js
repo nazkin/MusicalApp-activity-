@@ -50,7 +50,7 @@ const ExploreHome = (props) => {
             <button className="btn btn-danger btn-sm float-right mx-4">Logout</button>
             <Link className="navigation-link" to="/enter">Manage Account<img src="user.png" /> </Link>
         </div>
-        <h1 className="my-3">Artists trending on Jukebox today</h1>
+        <h1 className="my-5">Artists trending on Jukebox today</h1>
         <div className="row explore-row-main">
             <Artists accounts={allAccounts} userInfo={allUserInfo} photos={allPhotos} songs={allSongs}/>
             <Songs accounts={allAccounts} userInfo={allUserInfo} photos={allPhotos}  songs={allSongs}/>

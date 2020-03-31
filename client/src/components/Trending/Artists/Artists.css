@@ -17,11 +17,15 @@
     border-bottom: 2px double transparent;
     border-top: 2px double darkorange;
     cursor: pointer;
+    padding: 1rem;
+    border-radius: 5px;
 }
 .artist-photo:hover{
-    border-left: 1px double darkorange;
-    border-right: 1px double darkorange;
-    border-bottom: 2px double darkorange;
+    /* border-left: 1px double darkorange;
+    border-right: 1px double darkorange; */
+    border-bottom: 2px double lavender;
+    background-color: transparent;
+    color: linen;
 }
 .skills-section {
     color: orange;

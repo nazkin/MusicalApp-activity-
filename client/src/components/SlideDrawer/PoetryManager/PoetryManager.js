@@ -98,13 +98,13 @@ if(images.length != 0){
       
       <div className="row d-flex justify-content-between">
         <h1>Upload Photos of Yourself</h1>
-        <div className="col-md-7 border p-1">
+        <div className="col-md-6 ">
           <div className = "row image-row">
           {/* Flex-container that is creating a layout for all the files being uploaded */}
           {photoContent}
           </div>
         </div>
-        <div className="col-md-4 p-1">
+        <div className="col-md-4">
             <form onSubmit={uploadFileHandler} className="photo-form">
                 <div className="form-group">
                   <label>Upload Here</label>

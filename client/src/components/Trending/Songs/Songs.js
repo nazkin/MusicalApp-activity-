@@ -1,5 +1,6 @@
 import React from 'react';
 import './Songs.css';
+import MediaPlayer from '../../MusicPlayer/MusicPlayer';
 /**
 * @author
 * @function Songs
@@ -21,16 +22,18 @@ const Songs = (props) => {
             }
         })
         return(
-            <div className="col-10 song-full">
-                <div className="song-title">
+            <div className="col-12 song-full">
+                <MediaPlayer songName={song.name} author={user} downloadURL={song.downloadURL} songID={song._id}/>
+                {/* <div className="song-title">
                     <h6 id="name-song">{song.name}</h6>
                     <h5 id="author-song">{user}</h5>
                 </div>
                 <div className="media-player">
+                    
                     <audio className="player" controls>
                         <source type="audio/mpeg" src={song.downloadURL}/>
                     </audio>
-                </div>
+                </div> */}
             </div>
         )
     })
