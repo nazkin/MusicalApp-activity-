@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const helmet = require('helmet');
 const port = process.env.PORT || 8080;
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
 const User = require('./models/user');
 const Account = require('./models/account');
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+// app.use(express.static(path.join(__dirname, 'client', 'public')));
 
 
 app.get('/', (req, res)=> {

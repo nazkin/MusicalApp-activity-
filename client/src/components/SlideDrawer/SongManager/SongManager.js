@@ -19,7 +19,7 @@ const SongManager = (props) => {
 
 //***************************************************************EFFECT HOOKS
   useEffect(()=> {
-    axios.get(`http://localhost:8080/api/accountInfo/songs/${props.id}`)
+    axios.get(`/api/accountInfo/songs/${props.id}`)
       .then(res=> {
         console.log(res.data);
         const accId = res.data.data._id; 
@@ -47,7 +47,7 @@ const SongManager = (props) => {
      downloadURL: songUrl,
      id: props.id
     }
-    axios.post(`http://localhost:8080/api/upload/song/${accountId}`,obj)
+    axios.post(`/api/upload/song/${accountId}`,obj)
       .then(res=> {
         console.log(res);
         setSrc(null);

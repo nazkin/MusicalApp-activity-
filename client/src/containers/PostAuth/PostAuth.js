@@ -19,7 +19,7 @@ const [genre, setGenre] = useState("");
 
 
     useEffect(() => {
-       axios.get('http://localhost:8080/api/enter', {
+       axios.get('/api/enter', {
            headers: {
              "Content-Type":"application/x-www-form-urlencoded" ,
              "authorization": "Bearer "+sessionStorage.getItem('jwtToken')
@@ -34,7 +34,7 @@ const [genre, setGenre] = useState("");
     //Handling the opening of the drawer for account management
     const drawerToggleHandler = ()=> {
        
-            axios.get(`http://localhost:8080/api/find/${userId}`, {
+            axios.get(`/api/find/${userId}`, {
                 headers: {
                   "Content-Type":"application/x-www-form-urlencoded" ,
                   "authorization": "Bearer "+sessionStorage.getItem('jwtToken')

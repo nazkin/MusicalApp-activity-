@@ -16,7 +16,7 @@ const [idAccount, setIdAccount] = useState("");
 const [images, setImages] = useState([]);
 
 useEffect(()=> {
-  axios.get(`http://localhost:8080/api/accountInfo/photos/${props.id}`)
+  axios.get(`/api/accountInfo/photos/${props.id}`)
   .then(res=> {
     console.log(res.data.data.images);
     const accId = res.data.data._id; 
@@ -36,7 +36,7 @@ const saveImageDownload = (download, name)=> {
     url: download,
     id: props.id
   }
-  axios.post(`http://localhost:8080/api/upload/image/${idAccount}`, object)
+  axios.post(`/api/upload/image/${idAccount}`, object)
     .then(res=> {
       setPhotoSrc(null);
       props.close();

@@ -25,9 +25,9 @@ const SignIn = (props) => {
         //Controlling the path of my POST request depending on login or sign-in situation
         let url;
         if(hasAccount){
-            url = "http://localhost:8080/api/login";
+            url = "/api/login";
         } else {
-            url = "http://localhost:8080/api/add";
+            url = "/api/add";
         }
         //Sending out the post request that generates the JWT
         axios.post(url, user)
@@ -63,7 +63,7 @@ const SignIn = (props) => {
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
-        <p className="auth-control">{authControl} Click here! <button onClick={authTypeHandler}>0</button></p>
+        <p className="auth-control">{authControl} Click here! <button className="p-1" onClick={authTypeHandler}><img src="user.png" /></button></p>
         </div>
       </div>
     </div>

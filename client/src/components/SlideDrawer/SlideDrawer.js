@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import './SlideDrawer.css';
 import axios from 'axios';
 import PoetryManager from './PoetryManager/PoetryManager';
@@ -9,17 +10,21 @@ import MusicManager from './SongManager/SongManager';
 **/
 
 const SlideDrawer = (props) => {
+
     const [name, setName] = useState("");
     const [skills, setSkills] = useState("");
     const [genre, setGenre] = useState("");
     const [isBasicInfo, setIsBasicInfo] = useState(true);
     const [isMusic, setIsMusic] = useState(false);
     const [isPoetry, setIsPoetry] = useState(false);
+
     useEffect(()=> {
         setName(props.name);
         setSkills(props.skills);
         setGenre(props.genre);
-    },[props.show])
+    },[props.show]);
+
+    let history = useHistory();
 
     const updateFormHandler = (e)=> {
         e.preventDefault();
@@ -28,11 +33,15 @@ const SlideDrawer = (props) => {
             skills: skills,
             genre: genre
         }
-        axios.post(`http://localhost:8080/api/update/${props.id}`, updateObj)
+        axios.post(`/api/update/${props.id}`, updateObj)
             .then(res=> {
                 console.log(res.data);
                 props.close();
             }).catch(err=> console.log(err));
+    }
+    const logoutUserHandler = ()=> {
+        sessionStorage.clear();
+        history.push('/');
     }
     const manageMusicHandler = ()=> {
         setIsBasicInfo(false);
@@ -100,6 +109,7 @@ const SlideDrawer = (props) => {
             <button onClick={manageBasicsHandler} className="btn btn-dark mx-3">Manage Basics</button>
             <button onClick={manageMusicHandler} className="btn btn-info mx-3">Manage Music</button>
             <button onClick={managePoetryHandler} className="btn btn-warning mx-3 ">Manage Poetry</button>
+            <button onClick={logoutUserHandler}  className="btn btn-danger mx-3 ">Logout</button>
         </div>
        
     </div>
