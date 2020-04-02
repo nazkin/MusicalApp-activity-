@@ -1,7 +1,7 @@
-Name: (heart)BEATZ .Inc
-Description: Social Media application that makes it easier to locate musical talent in your area. In the game of hip-hop the right producer and the right artist, together can make million dollar collaboration if they are able to find each other. In this application, an artist/poet is able to showcase their writing and vocals, while producers can showcase the most amazing beats. Find the right partnerships quick and easy. One click away
+Name: Jukebox
+Description: This little app was used by creator in order to learn about how to work with mp3 files and image uploads. This was an attempt to create a very rough draft which will act as a precursor to a much nicer app that will be created as a capstone project.
 
-Authors: Nazar Kinash, Phil
+Authors: Naz
 #Tasks
 #Completed [X] --> Incomplete []
 
@@ -9,12 +9,20 @@ Authors: Nazar Kinash, Phil
 #1) Create authentication routes sign-up/login [X]
 #2) Create front-end pages responsible for login/sign-up [X]
 #3) JWT must be passed to the user as long as log-in/log-out happens and its checked during protected routes [X]
-#3) Ask a set-of questions to create an account
-#4) Display all accounts which are local
+#3) Ask a set-of questions to create an account [X]
+#4) Display all accounts which are local [X]
+#5) Allow user to upload mp3 files [X]
+#6) Allow user to upload images[X]
+#7) Display selected users and songs from the database[X]
 
+What still be done?
 
-Notes
+- Handle errors appropriately when it comes to authentication. If a user with an account signs-in, redirect him to log-in and display message
+- There are many other errors not handled as wanted
+- Communication between accounts
+- Better code organization
+- Ability to add comments and rate songs
+- With a rating system present it can be way easier to select trending songs
+- Have a better database set-up, which includes recently created songs. This will allow to add another feature which is newest songs
 
-Naz) I think it would actually be better to start creating the personal account at the same time as our user makes an account
-we can do this by using default values. 
-This means that everytime that the user will be working with his account info he will be updating
+- A lot more can be done after this as well
